@@ -1,0 +1,21 @@
+version: '3'
+
+# 使用外部网络
+# docker network create server_web-network
+networks:
+  server_web-network:
+    external: true
+
+services:
+  docker-tesseract:
+    image: my/tesseract-ocr
+    restart: always
+    tty: true
+    volumes:
+      - ./tesseract:/data
+    ports:
+      - 8000:8000
+    networks:
+      - server_web-network
+
+
